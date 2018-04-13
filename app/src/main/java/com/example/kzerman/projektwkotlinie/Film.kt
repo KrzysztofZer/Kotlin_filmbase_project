@@ -28,29 +28,28 @@ class Film : AppCompatActivity() {
         val extra: Bundle = intent.extras
         Log.d("Moj log", "pobrana wartosc: "+ extra.getInt("id"))
         // You have to input your apiKey here
-        val apiKey = ""
-        val url = "https://api.themoviedb.org/3/movie/"+extra.getInt("id").toString()+"?api_key="+apiKey
+        val url = "https://api.themoviedb.org/3/movie/"+extra.getInt("id").toString()+"?api_key=%s".format(getString(R.string.apiID))
         val response = URL (url).readText()
         Log.d("Moj log", "response "+ response)
 
         val  jsonn = JSONObject(response)
-        val poster = "https://image.tmdb.org/t/p/w300"+jsonn.getString("poster_path")
-        Log.d("Moj log", "plakat "+ poster)
+        val poster = "https://image.tmdb.org/t/p/w300%s".format(jsonn.getString("poster_path"))
+        Log.d("Moj log", "plakat %s".format(poster))
         Glide.with(applicationContext).load(poster).into(imageView)
 
         textTytul.text = jsonn.getString("title")
         textTytul.movementMethod = ScrollingMovementMethod()
         textData.text = jsonn.getString("release_date")
         textOpis.text = jsonn.getString("overview")
-        textGatunek.text = "Gatunek: "+ jsonn.getJSONArray("genres").getJSONObject(0).getString("name")
+        textGatunek.text = "Gatunek: %s".format(jsonn.getJSONArray("genres").getJSONObject(0).getString("name"))
         textOcena.setTextColor(Color.GREEN)
         textOcena.text = jsonn.get("vote_average").toString()
         textGlosy.setTextColor(Color.GREEN)
         textGlosy.text = jsonn.get("vote_count").toString()
         textIMDB.setTextColor(Color.RED)
         textIMDB.setOnClickListener(View.OnClickListener {
-            val internety = Intent (Intent.ACTION_VIEW,Uri.parse("http://www.imdb.com/title/"+jsonn.getString("imdb_id")+'/'))
-            startActivity(internety)
+            val internet = Intent (Intent.ACTION_VIEW,Uri.parse("http://www.imdb.com/title/%s%c".format(jsonn.getString("imdb_id"),'/')))
+            startActivity(internet)
         })
 
     }

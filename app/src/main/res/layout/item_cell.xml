@@ -21,13 +21,15 @@
             android:id="@+id/DataProd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Data Produkcji" />
+            android:text="Data Produkcji"
+            android:textColor="@android:color/white" />
 
         <TextView
             android:id="@+id/TytulProd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tytul" />
+            android:text="Tytul"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/Sczegoly"
