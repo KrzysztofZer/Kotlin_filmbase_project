@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ProjektWKotlinie</string>
+    <string name="Wyszukaj_film">TextView</string>
+    <string name="apiID">Your api key</string>
+</resources>
