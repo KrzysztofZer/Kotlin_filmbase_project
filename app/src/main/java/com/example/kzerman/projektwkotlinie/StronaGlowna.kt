@@ -1,5 +1,6 @@
 package com.example.kzerman.projektwkotlinie
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
@@ -15,8 +16,11 @@ import org.json.JSONObject
 import java.net.URL
 import android.os.StrictMode
 import android.support.annotation.RequiresApi
+import android.view.View
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.toast
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.view.inputmethod.InputMethodManager
 
 
 class StronaGlowna : AppCompatActivity() {
@@ -37,17 +41,26 @@ class StronaGlowna : AppCompatActivity() {
         Tytul.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24F)
 
 
-
-
+        // Clear edit text after tap on it
+        editText.setOnClickListener{
+            editText.setText("")
+        }
 
         button.setOnClickListener {
+            // Hide keyboard
+            val view = this.currentFocus
+            if (view != null) {
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+            }
+
             val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
             StrictMode.setThreadPolicy(policy)
             Log.d("Moj log", "po dodaniu uprawnien")
             // You have to input your apiKey here
             val apiKey = ""
 
-            val url = "https://api.themoviedb.org/3/search/movie?api_key=%s&query=%s".format(apiKey, editText.text.toString().replace(' ', '+'))
+            val url = "https://api.themoviedb.org/3/search/movie?api_key=%s&query=%s".format(getString(R.string.apiID), editText.text.toString().replace(' ', '+'))
             Log.d("Moj log", url)
 
             val response = URL(url).readText()
@@ -82,7 +95,7 @@ class StronaGlowna : AppCompatActivity() {
 
     }
 
-
+    // Class for adapter
     internal class MyItem(val nazwaFilmu: String, val dataProdukcji: String, val linkDoZdjecia: String, val id: Int)
 
 

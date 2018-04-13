@@ -28,7 +28,7 @@ internal class MyAdapter (private val arrayList: ArrayList<StronaGlowna.MyItem>,
         holder.bindItems(arrayList[position])
 holder.itemView.Sczegoly.setOnClickListener(View.OnClickListener {
   val intent = Intent(context,Film::class.java)
-    Log.d("Moj log","ID filmu do wyslania "+arrayList[position].id.toString())
+    Log.d("Moj log","ID filmu do wyslania %s".format(arrayList[position].id.toString()))
     intent.putExtra("id",arrayList[position].id)
    context.startActivity(intent)
 })
