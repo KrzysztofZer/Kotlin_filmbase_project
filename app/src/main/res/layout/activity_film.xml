@@ -18,11 +18,11 @@
         android:id="@+id/textTytul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tytul"
-        android:textColor="@android:color/black"
-        android:textSize="36sp"
         android:maxLines="999"
-        android:scrollbars = "horizontal"
+        android:scrollbars="horizontal"
+        android:text="Tytul"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="36sp"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,6 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Data"
+        android:textColor="@android:color/white"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/textTytul" />
 
@@ -39,6 +40,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Opis"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -56,6 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gatunek"
+        android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/textData" />
@@ -65,6 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textColor="@android:color/holo_green_light"
         android:textSize="40sp"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/textGatunek" />
@@ -74,6 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textColor="@android:color/holo_green_light"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/textOcena" />
 
