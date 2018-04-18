@@ -16,8 +16,8 @@
 
     <TextView
         android:id="@+id/textTytul"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="183dp"
+        android:layout_height="95dp"
         android:maxLines="999"
         android:scrollbars="horizontal"
         android:text="Tytul"
@@ -30,10 +30,12 @@
         android:id="@+id/textData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
         android:text="Data"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/textTytul" />
+        app:layout_constraintTop_toBottomOf="@+id/textGlosy" />
 
     <TextView
         android:id="@+id/textOpis"
@@ -57,17 +59,21 @@
     <TextView
         android:id="@+id/textGatunek"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="27dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
         android:text="Gatunek"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/textData" />
+        app:layout_constraintStart_toStartOf="@+id/textTytul"
+        app:layout_constraintTop_toBottomOf="@+id/textTytul" />
 
     <TextView
         android:id="@+id/textOcena"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
         android:text="TextView"
         android:textColor="@android:color/holo_green_light"
         android:textSize="40sp"
@@ -78,6 +84,8 @@
         android:id="@+id/textGlosy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
         android:text="TextView"
         android:textColor="@android:color/holo_green_light"
         app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -90,4 +98,37 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_save" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="242dp"
+        android:layout_height="63dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="-1dp"
+        android:numStars="5"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        android:stepSize="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textData" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ToggleButton"
+        android:textOff="Nie chce zobaczyc"
+        android:textOn="Chce zobaczyc"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textChceZobaczyc"
+        android:layout_width="wrap_content"
+        android:layout_height="14dp"
+        android:text='Kliknij by dodac do "chce zobaczyc"'
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/toggleButton"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -1,21 +1,15 @@
 package com.example.kzerman.projektwkotlinie
 
+
 import android.content.Context
 import android.content.Intent
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
 import com.bumptech.glide.Glide
-
-
 import kotlinx.android.synthetic.main.item_cell.view.*
-
-
 
 
 internal class MyAdapter (private val arrayList: ArrayList<StronaGlowna.MyItem>, private val context: Context, private val layout: Int): RecyclerView.Adapter<MyAdapter.ViewHolder>() {
