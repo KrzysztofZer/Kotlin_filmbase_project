@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_cell.view.*
 
 
-internal class MyAdapter (private val arrayList: ArrayList<StronaGlowna.MyItem>, private val context: Context, private val layout: Int): RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+internal class MyAdapter (private val arrayList: ArrayList<MyItem>, private val context: Context, private val layout: Int): RecyclerView.Adapter<MyAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAdapter.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(layout, parent, false)
         return ViewHolder(v)
@@ -23,7 +23,10 @@ internal class MyAdapter (private val arrayList: ArrayList<StronaGlowna.MyItem>,
 holder.itemView.Sczegoly.setOnClickListener(View.OnClickListener {
   val intent = Intent(context,Film::class.java)
     Log.d("Moj log","ID filmu do wyslania %s".format(arrayList[position].id.toString()))
-    intent.putExtra("id",arrayList[position].id)
+    if (arrayList[position].id!=-1)
+        intent.putExtra("id",arrayList[position].id.toString())
+    else
+        intent.putExtra("id",arrayList[position].nazwaFilmu)
    context.startActivity(intent)
 })
     }
@@ -34,7 +37,7 @@ holder.itemView.Sczegoly.setOnClickListener(View.OnClickListener {
 
     internal inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindItems(items: StronaGlowna.MyItem) {
+        fun bindItems(items: MyItem) {
             itemView.TytulProd.text = items.nazwaFilmu
             itemView.DataProd.text = items.dataProdukcji
             itemView.idFilmu.text = items.id.toString()

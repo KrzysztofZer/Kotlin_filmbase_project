@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainPageNews">
+
+    <Button
+        android:id="@+id/SearchButton"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:text="Search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/FavoriteButton"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="Favorite"
+        app:layout_constraintEnd_toStartOf="@+id/WantWatchButton"
+        app:layout_constraintStart_toEndOf="@+id/SearchButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/WantWatchButton"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:text="Want watch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/newsR"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FavoriteButton" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="360dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="-5dp"
+        android:editable="false"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="none"
+        android:linksClickable="false"
+        android:longClickable="false"
+        android:text="https://newsapi.org/  https://www.themoviedb.org/  https://filmweb.pl/ "
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</android.support.constraint.ConstraintLayout>

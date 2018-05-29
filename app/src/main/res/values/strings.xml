@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">ProjektWKotlinie</string>
     <string name="Wyszukaj_film">TextView</string>
-    <string name="apiID">Your api key</string>
+    <string name="apiID"></string>
+    <string name="newsesApiID"></string>
+    <string name="title_activity_main_page">MainPage</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

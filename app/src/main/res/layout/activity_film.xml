@@ -120,7 +120,8 @@
         android:textOff="Nie chce zobaczyc"
         android:textOn="Chce zobaczyc"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textChceZobaczyc"

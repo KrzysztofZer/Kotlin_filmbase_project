@@ -28,6 +28,7 @@ import com.example.kzerman.projektwkotlinie.R.id.editText
 
 
 class StronaGlowna : AppCompatActivity() {
+    var ifEditViewIsClicked = false
 
 
     @RequiresApi(Build.VERSION_CODES.GINGERBREAD)
@@ -88,9 +89,14 @@ class StronaGlowna : AppCompatActivity() {
 
             }
         }
+
         // Clear edit text after tap on it
         editText.setOnClickListener{
-            editText.setText("")
+            if(!ifEditViewIsClicked)
+            {
+                editText.setText("")
+                ifEditViewIsClicked = true
+            }
         }
         editText.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(view: View, keyCode: Int, keyevent: KeyEvent): Boolean {
@@ -103,15 +109,22 @@ class StronaGlowna : AppCompatActivity() {
         })
 
         button.setOnClickListener{
-            afterClick()
+            if(ifEditViewIsClicked)
+            {
+                afterClick()
+            }
+            else
+            {
+                toast("Pls input film name")
+            }
+
         }
 
 
 
     }
 
-    // Class for adapter
-    internal class MyItem(val nazwaFilmu: String, val dataProdukcji: String, val linkDoZdjecia: String, val id: Int)
+
 
 
 }
