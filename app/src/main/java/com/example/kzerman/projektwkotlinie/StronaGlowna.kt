@@ -1,29 +1,34 @@
 package com.example.kzerman.projektwkotlinie
 
+
 import android.content.Context
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.StrictMode
+import android.support.annotation.RequiresApi
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.util.TypedValue
+import android.view.KeyEvent
+import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
-
-
 import kotlinx.android.synthetic.main.activity_strona_glowna.*
-import org.json.JSONObject
-import java.net.URL
-import android.os.StrictMode
-import android.support.annotation.RequiresApi
-import android.view.View
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.toast
-import android.content.Context.INPUT_METHOD_SERVICE
-import android.view.inputmethod.InputMethodManager
+import org.json.JSONObject
+import java.net.URL
+import android.view.KeyEvent.KEYCODE_ENTER
+import android.view.View
+import com.example.kzerman.projektwkotlinie.R.id.editText
+
+
 
 
 class StronaGlowna : AppCompatActivity() {
+    var ifEditViewIsClicked = false
 
 
     @RequiresApi(Build.VERSION_CODES.GINGERBREAD)
@@ -40,13 +45,7 @@ class StronaGlowna : AppCompatActivity() {
         Tytul.setTextColor(Color.RED)
         Tytul.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24F)
 
-
-        // Clear edit text after tap on it
-        editText.setOnClickListener{
-            editText.setText("")
-        }
-
-        button.setOnClickListener {
+        fun afterClick(){
             // Hide keyboard
             val view = this.currentFocus
             if (view != null) {
@@ -89,14 +88,43 @@ class StronaGlowna : AppCompatActivity() {
                 MyR.adapter = myAdapter
 
             }
+        }
+
+        // Clear edit text after tap on it
+        editText.setOnClickListener{
+            if(!ifEditViewIsClicked)
+            {
+                editText.setText("")
+                ifEditViewIsClicked = true
+            }
+        }
+        editText.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(view: View, keyCode: Int, keyevent: KeyEvent): Boolean {
+                //If the keyevent is a key-down event on the "enter" button
+                return if (keyevent.getAction() === KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                   afterClick()
+                    true
+                } else false
+            }
+        })
+
+        button.setOnClickListener{
+            if(ifEditViewIsClicked)
+            {
+                afterClick()
+            }
+            else
+            {
+                toast("Pls input film name")
+            }
 
         }
 
 
+
     }
 
-    // Class for adapter
-    internal class MyItem(val nazwaFilmu: String, val dataProdukcji: String, val linkDoZdjecia: String, val id: Int)
+
 
 
 }
