@@ -14,7 +14,7 @@ class Favorite : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fevorite)
         val db = DataBaseHandler(baseContext)
-        val lista = contentView?.let { db.readAll() }
+        val lista = contentView?.let { db.readWatched() }
         val myAdapter = lista?.let { MyAdapter(it, this, R.layout.item_cell) }
         MyR_fav.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         MyR_fav.adapter = myAdapter

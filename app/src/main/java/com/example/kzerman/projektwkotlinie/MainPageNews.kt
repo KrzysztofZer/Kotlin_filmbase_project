@@ -24,6 +24,7 @@ class MainPageNews : AppCompatActivity() {
         SearchButton.setOnClickListener{goToSearchActivity()}
         FavoriteButton.setOnClickListener { goToFavorite() }
         WantWatchButton.setOnClickListener { goToWantToWatch() }
+        buttonAll.setOnClickListener { goToAll() }
 
     }
 
@@ -42,6 +43,11 @@ class MainPageNews : AppCompatActivity() {
         val intent = Intent(this,WantToWatch::class.java)
         startActivity(intent)
     }
+    fun goToAll(){
+        val intent = Intent(this,AllSaved::class.java)
+        startActivity(intent)
+    }
+
     fun setNews()
     {
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()

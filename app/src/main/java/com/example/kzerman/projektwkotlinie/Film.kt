@@ -15,6 +15,10 @@ import org.json.JSONObject
 import java.net.URL
 import android.widget.CompoundButton
 import org.jetbrains.anko.contentView
+import android.widget.Toast
+import android.widget.RatingBar
+
+
 
 
 class Film : AppCompatActivity() {
@@ -24,6 +28,11 @@ class Film : AppCompatActivity() {
         setContentView(R.layout.activity_film)
         initialization()
         Zapisz.setOnClickListener { saveToFavorites() }
+        val ratingBar = findViewById<RatingBar>(R.id.ratingBar)
+
+        ratingBar.onRatingBarChangeListener = RatingBar.OnRatingBarChangeListener { ratingBar, v, b ->
+            changeRating()
+        }
     }
     var poster = ""
 
@@ -40,15 +49,20 @@ class Film : AppCompatActivity() {
             textGatunek.text = list[2]
             textOcena.text = list[3]
             textGlosy.text = list[4]
-            textData.text = list[5]
+            var rateForFilm = list[5].toFloat()
+            ratingBar.rating = rateForFilm
+            textData.text = list[6]
             textIMDB.setOnClickListener(View.OnClickListener {
-                val internet = Intent (Intent.ACTION_VIEW,Uri.parse("http://www.imdb.com/title/%s%c".format(list[6],'/')))
+                val internet = Intent (Intent.ACTION_VIEW,Uri.parse("http://www.imdb.com/title/%s%c".format(list[7],'/')))
                 startActivity(internet)
             })
-            this.poster=list[7]
+            this.poster=list[8]
             Glide.with(applicationContext).load(this.poster).into(imageView)
-            if (list[8] == "0"){
-//            TODO
+            if (list[9] == "0"){
+                toggleButton.isChecked = false
+            }
+            else{
+                toggleButton.isChecked = true
             }
 
 
@@ -85,14 +99,14 @@ class Film : AppCompatActivity() {
         )
 
         toggleButton.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+            var db = DataBaseHandler(baseContext)
             if (isChecked) {
                 textChceZobaczyc.text = "Kliknij by usunac z \"chce zobaczyc\""
-                val mydatabase = openOrCreateDatabase("Favorites", Context.MODE_PRIVATE, null)
-                mydatabase.execSQL("CREATE TABLE IF NOT EXISTS favorites(Title VARCHAR PRIMARY KEY, Description VARCHAR, Type VARCHAR, Rating VARCHAR, Votes VARCHAR, Premier VARCHAR, Imdb VARCHAR, Img VARCHAR, WantSee TINYINT);")
-                mydatabase.execSQL("INSERT INTO Favorites VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%d')ON DUPLICATE KEY UPDATE;".format(textTytul.text, textOpis.text, textGatunek.text, textOcena.text, textGlosy.text, textData.text, textIMDB.text, this.poster, 1))
-
+                contentView?.let { db.updateWantToWatch(it,poster,1) }
             } else {
                 textChceZobaczyc.text = "Kliknij by dodac do \"chce zobaczyc\""
+                contentView?.let { db.updateWantToWatch(it,poster,0) }
+
             }
         })
 
@@ -100,17 +114,19 @@ class Film : AppCompatActivity() {
 
     fun saveToFavorites()
     {
-//        val mydatabase = openOrCreateDatabase("Favorites", Context.MODE_PRIVATE, null)
-//        mydatabase.execSQL("CREATE TABLE IF NOT EXISTS favorites(Title VARCHAR PRIMARY KEY, Description VARCHAR, Type VARCHAR, Rating VARCHAR, Votes VARCHAR, Premier VARCHAR, Imdb VARCHAR, Img VARCHAR, WantSee TINYINT);")
-//        if (!toggleButton.isChecked)
-//        {
-//            mydatabase.execSQL("INSERT INTO Favorites (Title, Description, Type, Rating, Votes, Premier, Imdb, Img, WantSee) VALUES('%s','%s','%s','%s','%s','%s','%s','%s',%d) ON DUPLICATE KEY UPDATE WantSee = VALUES(WantSee);".format(textTytul.text.toString().replace("'"," "), textOpis.text.toString().replace("'"," "), textGatunek.text.toString(), textOcena.text.toString(), textGlosy.text.toString(), textData.text.toString(), textIMDB.text.toString(), this.poster, 0))
-//        }
-//        val resultSet = mydatabase.rawQuery("Select * from Favorites", null)
-//        resultSet.moveToFirst()
-//        toast(resultSet.getString(0))
-//        resultSet.moveToFirst()
         var db = DataBaseHandler(baseContext)
-        contentView?.let { db.insertData(it,poster,0) }
-    }}
+        contentView?.let { db.insertData(it,poster,0, textTytul.text.toString()) }
+    }
+
+    fun changeRating(){
+        var db = DataBaseHandler(baseContext)
+        if (toggleButton.isChecked){
+            contentView?.let { db.updateRating(it, poster,1 ) }
+        }
+
+        else{
+            contentView?.let { db.updateRating(it, poster,0 )}
+        }
+    }
+}
 
